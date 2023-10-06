@@ -1,0 +1,20 @@
+import { useState, useEffect } from 'react'
+import { getImageCat } from '../services/solicitudes'
+
+function useCatImage (echo) {
+  const [pathImage, setPathImage] = useState('')
+  useEffect(() => {
+    if (!echo) return
+    getImageCat(echo).then(url => {
+      setPathImage(url)
+      console.log('imagen encontrada y actulizanda')
+    })
+  }, [echo])
+
+  function updatePathImage (url) {
+    setPathImage(url)
+  }
+  return [pathImage, updatePathImage]
+}
+
+export default useCatImage
