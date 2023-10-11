@@ -1,0 +1,65 @@
+{
+    "search": [
+        {
+            "name": "Troy",
+            "age": 29,
+            "ci": "22.030.812",
+            "job": "web developer"
+        },
+        {
+            "name": "Israel",
+            "age": 34,
+            "ci": "19.811.427",
+            "job": "mecánico"
+        },
+        {
+            "name": "Gladys",
+            "age": 65,
+            "ci": "5.960.674",
+            "job": "profesor de matemáticas"
+        },
+        {
+            "name": "Gustavo",
+            "age": 71,
+            "ci": "4.842.341",
+            "job": "profesor de inglés"
+        },
+        {
+            "name": "Rubén",
+            "age": 32,
+            "ci": "20.425.384",
+            "job": "contador"
+        },
+        {
+            "name": "Germán",
+            "age": 35,
+            "ci": "18.467.289",
+            "job": "químico"
+        },
+        {
+            "name": "Adoradia",
+            "age": 62,
+            "ci": "5.970.824",
+            "job": "profesora de matemáticas"
+        },
+        {
+            "name": "Saul",
+            "age": 60,
+            "ci": "7.481.274",
+            "job": "ingeniero en telecomunicaciones"
+        },
+        {
+            "name": "Génesis",
+            "age": 33,
+            "ci": "18.467.581",
+            "job": "chef"
+        },
+        {
+            "name": "Orlando",
+            "age": 35,
+            "ci": "17.467.281",
+            "job": "estadistico"
+        }
+
+    ]
+}
