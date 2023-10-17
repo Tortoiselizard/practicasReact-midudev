@@ -1,48 +1,31 @@
-import { useState, createContext } from 'react'
-import { products } from '../../mocks/products.json'
+import { createContext, useReducer } from 'react'
+import { initialState, reducer } from './reducer'
+import * as actions from './actions'
 
 export const CartContext = createContext()
 
 export function CartProvider ({ children }) {
-  const [cart, setCart] = useState([])
+  const [state, dispatch] = useReducer(reducer, initialState)
 
   function addItem (event) {
-    const newCart = structuredClone(cart)
-    const id = Number(event.target.name)
-    const item = products.filter(item => item.id === id)[0]
-    newCart.push({
-      id: item.id,
-      title: item.title,
-      image: item.images[0],
-      quantity: 1
-    })
-    setCart(newCart)
+    return dispatch(actions.addItem(event, state.itemsCart))
   }
 
   function quitItem (event) {
-    const id = Number(event.target.name)
-    const newCart = cart.filter(item => item.id !== id)
-    setCart(newCart)
+    return dispatch(actions.quitItem(event, state.itemsCart))
   }
 
   function handleChange (event) {
-    const { name, value } = event.target
-    const newCart = structuredClone(cart)
-    if (value <= 0) {
-      newCart.splice(Number(name), 1)
-    } else {
-      newCart[name].quantity = Number(value)
-    }
-    setCart(newCart)
+    return dispatch(actions.handleChange(event, state.itemsCart))
   }
 
   function clearCart () {
-    setCart([])
+    return dispatch(actions.clearCart())
   }
 
   return (
     <CartContext.Provider value={{
-      cart,
+      cart: state.itemsCart,
       handleChange,
       addItem,
       quitItem,
