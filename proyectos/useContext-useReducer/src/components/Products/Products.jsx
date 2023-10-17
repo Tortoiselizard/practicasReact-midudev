@@ -1,10 +1,9 @@
-import { useContext } from 'react'
 import useFilters from '../../hook/useFilters'
-import { CartContext } from '../../context/cart/cart'
+import useCarts from '../../hook/useCarts'
 
 function Products () {
   const { productsFiltered } = useFilters()
-  const { addItem } = useContext(CartContext)
+  const { cart, addItem, quitItem } = useCarts()
 
   return (
     <section className='products'>
@@ -14,8 +13,13 @@ function Products () {
             <img src={product.images[0]} />
             <h3>{product.title}</h3>
             <h4>Price: ${product.price}</h4>
-            <button name={product.id} onClick={addItem}>+</button>
-            {/* <button>+</button> */}
+            {
+                cart && cart.some(item => {
+                  return item.id === product.id
+                })
+                  ? <button name={product.id} onClick={quitItem}>quit from cart</button>
+                  : <button name={product.id} onClick={addItem}>add to cart</button>
+            }
           </li>
         ))}
       </ul>
