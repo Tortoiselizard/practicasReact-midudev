@@ -4,22 +4,24 @@ import { products } from '../../mocks/products.json'
 export const CartContext = createContext()
 
 export function CartProvider ({ children }) {
-  const [cart, setCart] = useState(products.slice(0, 5).map(item => ({
-    title: item.title,
-    image: item.images[0],
-    quantity: 1
-  })))
+  const [cart, setCart] = useState([])
 
   function addItem (event) {
     const newCart = structuredClone(cart)
     const id = Number(event.target.name)
     const item = products.filter(item => item.id === id)[0]
-    console.log('item:', item)
     newCart.push({
+      id: item.id,
       title: item.title,
       image: item.images[0],
       quantity: 1
     })
+    setCart(newCart)
+  }
+
+  function quitItem (event) {
+    const id = Number(event.target.name)
+    const newCart = cart.filter(item => item.id !== id)
     setCart(newCart)
   }
 
@@ -34,12 +36,17 @@ export function CartProvider ({ children }) {
     setCart(newCart)
   }
 
+  function clearCart () {
+    setCart([])
+  }
+
   return (
     <CartContext.Provider value={{
       cart,
-      setCart,
       handleChange,
-      addItem
+      addItem,
+      quitItem,
+      clearCart
     }}
     >
       {children}
