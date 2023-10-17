@@ -1,30 +1,18 @@
+import { useContext, useState } from 'react'
+import { CartContext } from '../../context/cart/cart.jsx'
 import './Cart.css'
-import { products } from '../../mocks/products.json'
-import { useState } from 'react'
-
-const someItems = products.splice(0, 5)
 
 function Cart ({ onClick }) {
-  const [items, setItems] = useState(someItems.map(item => ({
-    title: item.title,
-    image: item.images[0],
-    quantity: 5
-  })))
-
-  function handleChange (event) {
-    const newItems = structuredClone(items)
-    newItems[event.target.name] = event.target.value
-    setItems(newItems)
-  }
+  const { cart, handleChange } = useContext(CartContext)
 
   return (
     <div className='cart-container'>
       <button className='cart-button-close' onClick={() => { onClick() }}>X</button>
+      <h1>Carrito ({cart.length} - items)</h1>
       <ul>
-        <label>región vacía</label>
         {
-            items.map((item, index) => (
-              <li key={item.id} className='cart-item'>
+            cart.map((item, index) => (
+              <li key={item.title + item.id} className='cart-item'>
                 <img src={item.image} alt={item.title} />
                 <h3>{item.title}</h3>
                 <label>
