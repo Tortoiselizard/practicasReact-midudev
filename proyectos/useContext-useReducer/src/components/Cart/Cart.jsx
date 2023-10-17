@@ -1,14 +1,14 @@
-import { useContext, useState } from 'react'
-import { CartContext } from '../../context/cart/cart.jsx'
+import useCarts from '../../hook/useCarts.js'
 import './Cart.css'
 
 function Cart ({ onClick }) {
-  const { cart, handleChange } = useContext(CartContext)
+  const { cart, handleChange, clearCart } = useCarts()
 
   return (
     <div className='cart-container'>
+      <button className='cart-button-clear' onClick={clearCart}>Clear</button>
       <button className='cart-button-close' onClick={() => { onClick() }}>X</button>
-      <h1>Carrito ({cart.length} - items)</h1>
+      <h1>Carrito ({cart.length} - {cart.length === 1 ? 'item' : 'items'})</h1>
       <ul>
         {
             cart.map((item, index) => (
